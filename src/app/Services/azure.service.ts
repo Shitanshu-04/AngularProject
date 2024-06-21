@@ -9,7 +9,7 @@ import { ListWorkItem } from '../Models/listWorkItem';
   providedIn: 'root'
 })
 export class AzureService {
-  private accessToken = '6jqwikskt5b3htu4zxg5hk4cd7wsg6visrf4t2qjx5lwvu3djuuq';
+  private accessToken = 'accessToken';
   private baseUrl = 'https://dev.azure.com/shitanshushekharjha/Migration';
   private apiVersion = '6.0';
   private project = 'Migration'; 
