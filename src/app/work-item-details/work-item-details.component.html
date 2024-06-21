@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <h2>Text Input Form</h2>
+  <form #textInputForm="ngForm" (ngSubmit)="onSubmit(textInputForm)">
+    <div class="form-group">
+      <label for="selectedOption">Select Option</label>
+      <select id="selectedOption" class="form-control" name="selectedOption" #type ngModel required>
+        <option value="">-- Select --</option>
+        <option value="workItemId">WorkItemId</option>
+        <option value="projectName">ProjectName</option>
+      </select>
+      <label for="textInput">Enter details</label>
+      <input type="text" id="textInput" class="form-control" name="textInput" [(ngModel)]="workItemId"
+        [disabled]="type.value === 'projectName' ? true : false" required>
+      <label for="enterNumbers">Please Enter numbers</label>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary" [disabled]="type.value === '' ? true : false">Submit</button>
+    <div *ngIf="this.showErrorMessage === true">
+      <p class="error" *ngFor="let errorMessage of errorMessages;"></p>
+      <div class="error">{{errorMessage}}</div>
+    </div>
+  </form>
+</div>
+<div class="container mt-5" *ngIf="this.selectedValue === 'workItemId' && this.showErrorMessage === false">
+  <h2>Work Item Form</h2>
+  <form #workItemForm="ngForm">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" class="form-control" name="title" [(ngModel)]="workItem.fields['System.Title']"
+        required>
+    </div>
+    <div class="form-group">
+      <label for="type">Type</label>
+      <input type="text" id="type" class="form-control" name="type" [(ngModel)]="workItem.fields['System.WorkItemType']"
+        required>
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" id="state" class="form-control" name="state" [(ngModel)]="workItem.fields['System.State']"
+        required>
+    </div>
+    <div class="form-group">
+      <label for="assignedTo">Assigned To</label>
+      <input type="text" id="assignedTo" class="form-control" name="assignedTo"
+        [(ngModel)]="workItem.fields['System.AssignedTo'].displayName">
+    </div>
+  </form>
+  <div>
+    <label for="Children">Children</label>
+    <br>
+    <select [(ngModel)]="selectedItem">
+      <option class="dropdown-item" disabled selected value="undefined">Children of Work Item</option>
+      <option *ngFor="let item of lstWorkItems" [value]="item.fields['System.Title']">{{ item.fields['System.Title'] }}
+      </option>
+    </select>
+  </div>
+</div>
+<div class="container mt-5" *ngIf="this.selectedValue === 'projectName' && this.showErrorMessage === false">
+  <app-work-item-list [lstWorkItems]="workItemList"></app-work-item-list>
+</div>

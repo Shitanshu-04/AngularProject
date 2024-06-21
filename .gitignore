@@ -1,7 +1,15 @@
 # Node.js
 node_modules/
+# Node.js
+node_modules/
 npm-debug.log
 yarn-error.log
+# Build output
+/dist/
+# Angular development server
+/.angular/
+# IDE files
+*.iml
 # Build output
 /dist/
 # Angular development server
